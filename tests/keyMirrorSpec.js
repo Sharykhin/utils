@@ -40,7 +40,7 @@ describe('keyMirror function', function() {
 
 	});
 
-	it('should bo ably to handle very deep objects', function() {
+	it('should be able to handle very deep objects', function() {
 			var obj = {
 					ADD: null,
 					TODO: {
@@ -68,6 +68,35 @@ describe('keyMirror function', function() {
 						META: {
 							AUTHOR: 'TODO_MAIL_META_AUTHOR'							
 						}
+					}
+				},
+				DELETE:'foo'
+			};	 
+			assert.deepEqual(result, resultObj);
+	});
+
+	it('should be able to set custom value for deep property', function(){
+		var obj = {
+					ADD: null,
+					TODO: {
+						CREATE: null,
+						UPDATE: null,
+						MAIL: {
+							SEND:null,
+							GET: 'get',							
+						}
+						},
+					DELETE:'foo'
+					};
+			var result = keyMirror(obj);
+			var resultObj = {
+				ADD:'ADD',
+				TODO: {
+					CREATE:'TODO_CREATE',
+					UPDATE:'TODO_UPDATE',
+					MAIL:{
+						SEND:'TODO_MAIL_SEND',
+						GET:'get'						
 					}
 				},
 				DELETE:'foo'
